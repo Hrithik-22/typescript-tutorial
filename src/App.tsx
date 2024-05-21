@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
 import InputField from "./components/InputField";
+import { Todo } from "./model";
+
+
+
 // let role:[number,string];
 // role=[5,"stu"];
 // only number,string allowed and that to in only 2 allowed.
@@ -10,13 +14,23 @@ import InputField from "./components/InputField";
 //     </div>
 //   );
 // }
-
 const App: React.FC = () => {
+  const [todo,setToDo]=useState<string>("");
+  // console.log(todo);
+  const [todos, setTodos] = useState<Todo[]>([]);
+  // Array of TODOS
+  const handleAdd=(e:React.FormEvent)=>{
+    e.preventDefault();
+    if(todo){
+      // setTodos([...todos,{id:Date.now(),todo:todo,isDone:false}]);
+      setTodos([...todos,{id:Date.now(),todo,isDone:false}]);
+      setToDo("");
+    }  
+  }
   return (
-    
       <div className="App">
         <span className="heading">Taskify</span>
-        <InputField />
+        <InputField todo={todo} setToDo={setToDo} handleAdd={handleAdd} />
       </div>
 
   );
